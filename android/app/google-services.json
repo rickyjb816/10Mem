@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "712203518598",
+    "firebase_url": "https://mem-901e2.firebaseio.com",
+    "project_id": "mem-901e2",
+    "storage_bucket": "mem-901e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712203518598:android:fe80504d2bebeafee8c707",
+        "android_client_info": {
+          "package_name": "com.memmori.ten_mem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712203518598-gdctuikiomlsr1pffond3q7osd72jmua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3llSGEdIsVK1c0Y5wWcXAw_IsQOwg7f0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712203518598-gdctuikiomlsr1pffond3q7osd72jmua.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "712203518598-a1mhod2lp88s14e2vmu713qtgjovid49.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.memmori.tenmem"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712203518598:android:48152ee1f9b2df84e8c707",
+        "android_client_info": {
+          "package_name": "com.roundsquaresstudios.tenmem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712203518598-e0gs7olkluvjsjgupf5s0duv6ajt9vtm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roundsquaresstudios.tenmem",
+            "certificate_hash": "262c63088bf360495a78a6c8a1a00268662cb7a1"
+          }
+        },
+        {
+          "client_id": "712203518598-gdctuikiomlsr1pffond3q7osd72jmua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3llSGEdIsVK1c0Y5wWcXAw_IsQOwg7f0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712203518598-gdctuikiomlsr1pffond3q7osd72jmua.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "712203518598-a1mhod2lp88s14e2vmu713qtgjovid49.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.memmori.tenmem"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
