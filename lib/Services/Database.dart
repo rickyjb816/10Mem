@@ -44,7 +44,7 @@ class DatabaseService {
     });
   }
 
-  Future updateMemoryData(bool hasImageChanged, File image, String imageName, String imageRef, String description, Timestamp dateTaken) async {
+  Future updateMemoryData(bool hasImageChanged, File image, String title, String imageName, String imageRef, String description, Timestamp dateTaken) async {
     var url;
     var filePath;
 
@@ -62,6 +62,7 @@ class DatabaseService {
     }
 
     return await memoriesCollection.document(uid).updateData({
+      'title': title,
       'image': url ?? imageName,
       'image_ref': filePath ?? imageRef,
       'description': description,
@@ -181,6 +182,7 @@ class DatabaseService {
   Memory _memoryFromSnapshot(DocumentSnapshot snapshot) {
     return Memory(
       uid: uid,
+      title: snapshot.data['title'],
       image: snapshot.data['image'],
       imageRef: snapshot.data['image_ref'],
       userUid: snapshot.data['user_uid'],
@@ -192,7 +194,7 @@ class DatabaseService {
     );
   }
 
-  Future addMemoryData(File image, String userUid, String decsription, Timestamp dateTaken) async {
+  Future addMemoryData(File image, String userUid, String title, String decsription, Timestamp dateTaken) async {
     final FirebaseStorage _storage = FirebaseStorage(storageBucket: 'gs://tenmem/');
 
     StorageUploadTask _uploadTask;
@@ -207,6 +209,7 @@ class DatabaseService {
     updateUserMemoryCount(userUid, 'memory_count', 1);
 
     return await memoriesCollection.document(uid).setData({
+      'title': title,
       'image': imageDownloadURL,
       'image_ref': filePath,
       'user_uid': userUid,

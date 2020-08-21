@@ -55,7 +55,7 @@ class _MemoryDisplayState extends State<MemoryDisplay> with WidgetsBindingObserv
 
         return loading ? Loading(text: "Deleting Memmori") : Scaffold(
           appBar: AppBar(
-            title: Text(widget.tag),
+            title: Text(memory.title),
             centerTitle: true,
             backgroundColor: mainColor,
             actions: <Widget>[
@@ -79,7 +79,7 @@ class _MemoryDisplayState extends State<MemoryDisplay> with WidgetsBindingObserv
               children: <Widget>[
                 SizedBox(height: 40),
                 Card(
-                  color: secondaryColor,
+                  color: Color.fromRGBO(54, 69, 79, 1),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Stack(

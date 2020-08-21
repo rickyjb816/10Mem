@@ -5,6 +5,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ten_mem/Models/Memory.dart';
 import 'package:ten_mem/Models/User.dart';
+import 'package:ten_mem/Pages/Home/AddRecording.dart';
 import 'package:ten_mem/Services/Database.dart';
 import 'package:ten_mem/Shared/Constants.dart';
 import 'package:ten_mem/Shared/Loading.dart';
@@ -22,7 +23,9 @@ class EditMemory extends StatefulWidget {
 
 class _EditMemoryState extends State<EditMemory> {
 
-  TextEditingController _controller;
+  TextEditingController _descriptionController;
+  TextEditingController _titleController;
+  String title;
   String description;
 
   String image;
@@ -52,7 +55,9 @@ class _EditMemoryState extends State<EditMemory> {
 
         Memory memory = snapshot.data;
 
-        _controller = new TextEditingController(text: memory.description);
+        _titleController = new TextEditingController(text: memory.title);
+        _descriptionController = new TextEditingController(text: memory.description);
+        title = memory.title;
         description = memory.description;
         pickedDate = memory.dateTaken.toDate();
         //dateTaken = Timestamp.fromDate(pickedDate);
@@ -67,7 +72,7 @@ class _EditMemoryState extends State<EditMemory> {
                   await DatabaseService(uid: memory.uid).deleteFile(memory.imageRef);
                 }
                 //Save To Database
-                await DatabaseService(uid: memory.uid).updateMemoryData(_imageFile != null, _imageFile, _imageFile == null ? memory.image : '', _imageFile == null ? memory.imageRef : '', _controller.text, Timestamp.fromDate(pickedDate));
+                await DatabaseService(uid: memory.uid).updateMemoryData(_imageFile != null, _imageFile, _imageFile == null ? memory.image : '', _imageFile == null ? memory.imageRef : '', _titleController.text, _descriptionController.text, Timestamp.fromDate(pickedDate));
                 widget.toggleView();
                 loading = false;
                 },
@@ -133,8 +138,15 @@ class _EditMemoryState extends State<EditMemory> {
                           ),
                         )
                     ),
+                    SizedBox(height: 20),
                     TextField(
-                      controller: _controller,
+                      controller: _titleController,
+                      textCapitalization: TextCapitalization.sentences,
+                      decoration: textInputDecoration.copyWith(
+                          hintText: 'Title'),
+                    ),
+                    TextField(
+                      controller: _descriptionController,
                       textCapitalization: TextCapitalization.sentences,
                       decoration: textInputDecoration.copyWith(
                           hintText: 'Description'),

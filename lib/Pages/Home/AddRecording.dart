@@ -265,6 +265,9 @@ class _NewRecordingWidgetState extends State<NewRecordingWidget> {
                             ),
                             RaisedButton(
                               child: Text('Play'),
+                              color: mainColor,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
+                              textColor: Colors.white,
                               onPressed: () {
                                 AudioPlayer().play(narration.path, isLocal: true);
                               },
@@ -285,6 +288,9 @@ class _NewRecordingWidgetState extends State<NewRecordingWidget> {
                             ),
                             SizedBox(height: 15.0),
                             RaisedButton(
+                              color: mainColor,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
+                              textColor: Colors.white,
                               child: Text('Upload'),
                               onPressed: () async {
                                 setState(() => loading = true);

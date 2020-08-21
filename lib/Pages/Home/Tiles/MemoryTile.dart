@@ -20,19 +20,22 @@ class MemoryTile extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(top: 8.0),
         child: Card(
-          color: Colors.transparent,
+          color: mainColor,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              child: Hero(
-                tag: tag,
-                child: GestureDetector(
-                  child: Image.network(
-                    memoryMini.image,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (context, child, progress) {
-                      return progress == null ? child : CircularProgressIndicator();
-                    }),
-                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MemoryWrapper(memoryMini: memoryMini, tag: tag,)))
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Hero(
+                  tag: tag,
+                  child: GestureDetector(
+                    child: Image.network(
+                      memoryMini.image,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, progress) {
+                        return progress == null ? child : CircularProgressIndicator();
+                      }),
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MemoryWrapper(memoryMini: memoryMini, tag: tag,)))
+                  ),
                 ),
               ),
             ),

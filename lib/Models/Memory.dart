@@ -10,6 +10,7 @@ class MemoryMini {
 
 class Memory {
   final String uid;
+  final String title;
   final String image;
   final String imageRef;
   final String userUid;
@@ -19,5 +20,5 @@ class Memory {
   final String narrationUri;
   //final String fileType;
 
-  Memory({this.uid, this.image, this.imageRef, this.userUid, this.description, this.creationDate, this.dateTaken, this.narrationUri});
+  Memory({this.uid, this.title, this.image, this.imageRef, this.userUid, this.description, this.creationDate, this.dateTaken, this.narrationUri});
 }

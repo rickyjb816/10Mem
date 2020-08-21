@@ -29,7 +29,7 @@ class AddMemory extends StatefulWidget {
 
 class _AddMemoryState extends State<AddMemory> {
 
-  String image, description, narrationUri;
+  String image, title, description, narrationUri;
   String error = '';
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool loading = false;
@@ -119,6 +119,17 @@ class _AddMemoryState extends State<AddMemory> {
                   textCapitalization: TextCapitalization.sentences,
                   validator: (input) =>
                   input.isEmpty
+                      ? 'Enter Title'
+                      : null,
+                  onSaved: (input) => title = input,
+                  decoration: textInputDecoration.copyWith(
+                      hintText: 'Title'),
+                ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                  textCapitalization: TextCapitalization.sentences,
+                  validator: (input) =>
+                  input.isEmpty
                       ? 'Enter Description'
                       : null,
                   onSaved: (input) => description = input,
@@ -179,7 +190,7 @@ class _AddMemoryState extends State<AddMemory> {
       formState.save();
       try {
         setState(() => loading = true);
-        dynamic result = await DatabaseService().addMemoryData(_imageFile, user.uid, description, dateTaken);
+        dynamic result = await DatabaseService().addMemoryData(_imageFile, user.uid, title, description, dateTaken);
         if(result == null) {
           setState(() {
             error = 'Invalid Email And/Or Password';
