@@ -37,6 +37,8 @@ TextEditingController _controller = new TextEditingController();
 LocalFileSystem localFileSystem;
 io.File narration;
 
+
+
 bool loading = false;
 
 //Question Stuff
@@ -139,6 +141,16 @@ class _NewRecordingWidgetState extends State<NewRecordingWidget> {
     });
   }
 
+
+  @override
+  void dispose() {
+    super.dispose();
+    narration = null;
+    _recording = null;
+  }
+
+  String errorMessage = '';
+
   @override
   Widget build(BuildContext context) {
     return loading ? Loading(text: 'Your Recording Is Being Uploaded') : Scaffold(
@@ -220,12 +232,13 @@ class _NewRecordingWidgetState extends State<NewRecordingWidget> {
                             ),
                             SizedBox(height: 20),
                             Center(child: Text('Duration: ${_recording.duration.toString().split('.')[0]}', style: kSubtitleStyle,)),
+                            Center(child: Text(errorMessage, style: kSubtitleStyle.copyWith(color: Colors.red),)),
                             SizedBox(height: 40),
                             Center(
                                 child: Text('Questions', style: kSubtitleStyle)
                             ),
                             SizedBox(
-                              height: 300,
+                              height: 275,
                               child: ListView(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
@@ -249,61 +262,62 @@ class _NewRecordingWidgetState extends State<NewRecordingWidget> {
                       ),
                       Padding(
                         padding: EdgeInsets.all(40.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Center(
-                              child: Text(
+                        child: Center(
+                          child: Column(
+                            //crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
                                 'Preview',
                                 style: kTitleStyle,
                               ),
-                            ),
-                            SizedBox(height: 15.0),
-                            Text(
-                              'Title: ${_title.text}',
-                              style: kSubtitleStyle,
-                            ),
-                            RaisedButton(
-                              child: Text('Play'),
-                              color: mainColor,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
-                              textColor: Colors.white,
-                              onPressed: () {
-                                AudioPlayer().play(narration.path, isLocal: true);
-                              },
-                            ),
-                          ],
+                              SizedBox(height: 15.0),
+                              Text(
+                                'Title: ${_title.text}',
+                                style: kSubtitleStyle,
+                              ),
+                              SizedBox(height: 15.0),
+                              RaisedButton(
+                                child: Text('Play'),
+                                color: mainColor,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
+                                textColor: Colors.white,
+                                onPressed: () {
+                                  AudioPlayer().play(narration.path, isLocal: true);
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.all(40.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Center(
-                              child: Text(
+                        child: Center(
+                          child: Column(
+                            //crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
                                 'Upload',
                                 style: kTitleStyle,
                               ),
-                            ),
-                            SizedBox(height: 15.0),
-                            RaisedButton(
-                              color: mainColor,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
-                              textColor: Colors.white,
-                              child: Text('Upload'),
-                              onPressed: () async {
-                                setState(() => loading = true);
-                                dynamic result = await DatabaseService().uploadRecording(widget.memoryUid, narration, _title.text);
-                                if(result == null) {
-                                  setState(() {
-                                    loading = false;
-                                  });
-                                }
-                                Navigator.pop(context);
-                              },
-                            )
-                          ],
+                              SizedBox(height: 15.0),
+                              RaisedButton(
+                                color: mainColor,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
+                                textColor: Colors.white,
+                                child: Text('Upload'),
+                                onPressed: () async {
+                                  setState(() => loading = true);
+                                  dynamic result = await DatabaseService().uploadRecording(widget.memoryUid, narration, _title.text);
+                                  if(result == null) {
+                                    setState(() {
+                                      loading = false;
+                                    });
+                                  }
+                                  Navigator.pop(context);
+                                },
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -345,10 +359,26 @@ class _NewRecordingWidgetState extends State<NewRecordingWidget> {
                         ),
                         _currentPage == _numPages-1 ? Text('') : FlatButton(
                           onPressed: () {
-                            _pageController.nextPage(
-                              duration: Duration(milliseconds: 500),
-                              curve: Curves.ease,
-                            );
+                            if(_currentPage == 1) {
+                              if(narration != null) {
+                                _pageController.nextPage(
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.ease,
+                                );
+                                }
+                              else {
+                                setState(() {
+                                  errorMessage = 'Please Record Some Narration';
+                                });
+                                }
+                            }
+                            else {
+                              _pageController.nextPage(
+                                duration: Duration(milliseconds: 500),
+                                curve: Curves.ease,
+                              );
+                            }
+
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

@@ -60,10 +60,10 @@ class _RecordingTileState extends State<RecordingTile> with WidgetsBindingObserv
             builder: (BuildContext context) {
               final isPlayingList = Provider.of<List<bool>>(context);
               return ListTile(
-                  leading: Icon(isPlayingList[widget.index] ? Icons.pause : Icons.play_arrow, size: 40,),
-              title: Text('${widget.index+1}. ${widget.recording.title}'),
-              subtitle: Text('Recorded on: ${widget.recording.creationDate.toDate().day}/${widget.recording.creationDate.toDate().month}/${widget.recording.creationDate.toDate().year}'),
-              onTap: () {widget.playingIndex(widget.index, widget.recording.recordingUri);},
+                //leading: Icon(isPlayingList[widget.index] ? Icons.pause : Icons.play_arrow, size: 40,),
+                title: Text('${widget.index+1}. ${widget.recording.title}'),
+                subtitle: Text('Recorded on: ${widget.recording.creationDate.toDate().day}/${widget.recording.creationDate.toDate().month}/${widget.recording.creationDate.toDate().year}'),
+                onTap: () {widget.playingIndex(widget.index, widget.recording.recordingUri);},
               );
             },
             ),
