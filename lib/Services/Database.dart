@@ -29,6 +29,7 @@ class DatabaseService {
       'given_feedback': false,
       'profile_image': profileImage,
       'show_help': true,
+      'memory_count' : 0
     });
   }
 
@@ -157,7 +158,7 @@ class DatabaseService {
     return recordingsCollection
         .where('memory_uid', isEqualTo: uid)
         .orderBy('creation_date', descending: false)
-        .getDocuments(source: Source.serverAndCache).asStream()
+        .snapshots()
         .map(_recordingsFromSnapshot);
   }
 

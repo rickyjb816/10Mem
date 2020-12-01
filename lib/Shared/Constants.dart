@@ -29,6 +29,7 @@ const mainColor = Color.fromRGBO(0, 153, 153, 1);
 const secondaryColor = Color.fromRGBO(0, 102, 102, 1);
 const tertiaryColor = Color.fromRGBO(255, 255, 255, 1);
 const disabledColor = Colors.grey;
+const charcoalColor = Color.fromRGBO(54, 69, 79, 1);
 
 const appIcon = 'assets/tenmemlogo.svg';
 
@@ -36,14 +37,14 @@ const double padding = 16.0;
 const double avatarRadius = 66.0;
 
 final kTitleStyle = TextStyle(
-    color: Colors.white,
+    color: charcoalColor,
     fontFamily: 'CM Sans Serif',
-    fontSize: 26.0,
+    fontSize: 20.0,
     height: 1.5,
 );
 
 final kSubtitleStyle = TextStyle(
-    color: Colors.white,
+    color: charcoalColor,
     fontSize: 18.0,
     height: 1.2,
 );

@@ -54,10 +54,11 @@ class _AddMemoryState extends State<AddMemory> {
 
 
 
-    return loading ? Loading(text: 'Your Memmori Is Being Uploaded',) : Scaffold(appBar: AppBar(
-      title: Text('Add Memory'),
-      centerTitle: true,
-      backgroundColor: mainColor,
+    return loading ? Loading(text: 'Your Memmori Is Being Uploaded',) : Scaffold(
+      appBar: AppBar(
+        title: Text('Add Memory'),
+        centerTitle: true,
+        backgroundColor: mainColor,
     ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),

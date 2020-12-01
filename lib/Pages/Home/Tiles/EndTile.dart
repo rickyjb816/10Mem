@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:ten_mem/Models/Memory.dart';
 import 'package:ten_mem/Pages/Home/AddRecording.dart';
 
 class RecordingEndTile extends StatelessWidget {
 
   final String memoryUid;
+  final Memory memory;
 
-  RecordingEndTile({this.memoryUid});
+  RecordingEndTile({this.memoryUid, this.memory});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class RecordingEndTile extends StatelessWidget {
                 child: Icon(Icons.add, size: 50,),
                 onTap: () {
                   var route = ModalRoute.of(context).settings.name;
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AddRecording(memoryUid: memoryUid), settings: RouteSettings(name: route)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AddRecording(memoryUid: memoryUid, memory: memory,), settings: RouteSettings(name: route)));
                 }
             ),
           ),

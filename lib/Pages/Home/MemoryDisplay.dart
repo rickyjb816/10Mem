@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:ten_mem/Models/Memory.dart';
 import 'package:ten_mem/Models/Recordings.dart';
 import 'package:ten_mem/Models/User.dart';
+import 'package:ten_mem/Pages/Home/MemoryInformation.dart';
 import 'package:ten_mem/Pages/Home/Tiles/EndTile.dart';
 import 'package:ten_mem/Pages/Home/Tiles/RecordingTile.dart';
 import 'package:ten_mem/Services/Database.dart';
@@ -109,29 +110,32 @@ class _MemoryDisplayState extends State<MemoryDisplay> with WidgetsBindingObserv
                             //RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
                             textColor: Colors.white,
                           ),
-                        )
+                        ),
+                        Positioned(
+                          left: -25,
+                          child: RaisedButton(
+                            onPressed: () {
+                              var route = ModalRoute.of(context).settings.name;
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => MemoryInformation(memory: memory), settings: RouteSettings(name: route)));
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Icon(Icons.info, size: 30,),
+                            ),
+                            color: mainColor,
+                            shape: CircleBorder(),
+                            //RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
+                            textColor: Colors.white,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
-                _memoryTabs(),
                 SizedBox(height: 20,),
                 Container(
                   height: 600.0,
-                  child: PageView(
-                    physics: ClampingScrollPhysics(),
-                    controller: _pageController,
-                    onPageChanged: (int page) {
-                      setState(() {
-                        _currentPage = page;
-                      });
-                    },
-
-                    children: <Widget>[
-                      InfoTab(memory: memory),
-                      RecordingsTab(memory: memory)
-                    ],
-                  ),
+                  child: RecordingsTab(memory: memory)
                 )
               ],
             ),
@@ -379,7 +383,7 @@ class _RecordingsTabState extends State<RecordingsTab> {
                     itemCount: recordings.length+1,
                     itemBuilder: (context, index) {
                     if(index == recordings.length) {
-                    return RecordingEndTile(memoryUid: widget.memory.uid);
+                    return RecordingEndTile(memoryUid: widget.memory.uid, memory: widget.memory);
                     }
                     isPlaying.add(false);
                     return Provider<List<bool>>.value(
