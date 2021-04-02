@@ -58,12 +58,13 @@ class _FeedbackTabState extends State<FeedbackTab> {
                       itemCount: 5,
                       itemSize: 50.0,
                       itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber),
+
+                      /*builder: (context, _) => Icon(Icons.star, color: Colors.amber),
                       onRatingUpdate: (rating) {
                         setState(() {
                           _rating = rating;
                         });
-                      },
+                      },*/
                     ),
                     Text('Rating: ${_rating ?? ''}', style: TextStyle(color: mainColor, fontSize: 20)),
                     SizedBox(height: 40),

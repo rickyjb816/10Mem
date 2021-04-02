@@ -1,5 +1,4 @@
 import 'package:audioplayer/audioplayer.dart';
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ten_mem/Models/Memory.dart';
@@ -12,7 +11,6 @@ import 'package:ten_mem/Services/Database.dart';
 import 'package:ten_mem/Shared/Constants.dart';
 import 'package:ten_mem/Shared/CustomDialog.dart';
 import 'package:ten_mem/Shared/Loading.dart';
-import 'package:video_player/video_player.dart';
 
 
 
@@ -34,10 +32,6 @@ class _MemoryDisplayState extends State<MemoryDisplay> with WidgetsBindingObserv
   bool isInfoShowing = true;
   bool loading = false;
   Memory memory;
-
-  VideoPlayerController videoPlayerController;
-  ChewieController chewieController;
-  Chewie playerWidget;
 
 
   @override
@@ -203,8 +197,6 @@ class _MemoryDisplayState extends State<MemoryDisplay> with WidgetsBindingObserv
   void dispose() {
     super.dispose();
     WidgetsBinding.instance.removeObserver(this);
-    videoPlayerController.dispose();
-    chewieController.dispose();
     audioPlayer.stop();
   }
 
@@ -257,11 +249,6 @@ class _MemoryDisplayState extends State<MemoryDisplay> with WidgetsBindingObserv
               return progress == null ? child : CircularProgressIndicator();
             }
         );
-        break;
-      }
-      case 'video': {
-        //VideoPlayerController vpc = VideoPlayerController.network(memory.image);
-        return playerWidget;
         break;
       }
     }
